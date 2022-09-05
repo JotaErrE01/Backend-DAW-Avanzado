@@ -6,6 +6,8 @@ public class Respuesta {
   
   [Key] public int Id { get; set; }
   
+  [Required] public string TituloRespuesta { get; set; }
+  
   [Required] public string TextoRespuesta { get; set; }
   
   [Required] public string UsuarioRespuesta { get; set; }
