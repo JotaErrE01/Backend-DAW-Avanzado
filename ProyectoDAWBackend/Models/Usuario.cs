@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoDAWBackend.Models; 
@@ -9,9 +10,11 @@ public class Usuario {
   
   [Required] public string Apellidos { get; set; }
   
-  [Required] public string Role { get; set; }
+  [Required] [DefaultValue("client")] public string Role { get; set; }
   
-  [Required] public string Email { get; set; }
+  [Required] [EmailAddress]  public string Email { get; set; }
   
-  [Required] public string Password { get; set; }
+  [Required] public byte[] PasswordHash { get; set; }
+  
+  [Required] public byte[] PasswordSalt { get; set; }
 }

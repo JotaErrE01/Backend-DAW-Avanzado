@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoDAWBackend.Data;
@@ -11,6 +7,7 @@ using ProyectoDAWBackend.Models;
 namespace ProyectoDAWBackend.Controllers {
   [Route("api/[controller]")]
   [ApiController]
+  [Authorize(Roles = "admin")]
   public class UsuariosController : ControllerBase {
     private readonly ApplicationDbContext _context;
 
@@ -72,16 +69,16 @@ namespace ProyectoDAWBackend.Controllers {
     // POST: api/Usuarios
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario) {
-      if (_context.Usuarios == null) {
-        return Problem("Entity set 'ApplicationDbContext.Usuarios'  is null.");
-      }
-
-      _context.Usuarios.Add(usuario);
-      await _context.SaveChangesAsync();
-
-      return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
-    }
+    // public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario) {
+    //   if (_context.Usuarios == null) {
+    //     return Problem("Entity set 'ApplicationDbContext.Usuarios'  is null.");
+    //   }
+    //
+    //   _context.Usuarios.Add(usuario);
+    //   await _context.SaveChangesAsync();
+    //
+    //   return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
+    // }
 
     // DELETE: api/Usuarios/5
     [HttpDelete("{id}")]

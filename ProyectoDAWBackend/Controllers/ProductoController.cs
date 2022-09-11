@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -63,6 +64,7 @@ namespace ProyectoDAWBackend.Controllers {
     // PUT: api/Producto/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> PutProducto(int id, Producto producto) {
       if (id != producto.Id) {
         return BadRequest();
@@ -88,6 +90,7 @@ namespace ProyectoDAWBackend.Controllers {
     // POST: api/Producto
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
+    [Authorize(Roles = "admin")]
     public async Task<ActionResult<Producto>> PostProducto(Producto producto) {
       if (_context.Productos == null) {
         return Problem("Entity set 'ApplicationDbContext.Productos'  is null.");
@@ -101,6 +104,7 @@ namespace ProyectoDAWBackend.Controllers {
 
     // DELETE: api/Producto/5
     [HttpDelete("{id}")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> DeleteProducto(int id) {
       if (_context.Productos == null) {
         return NotFound();
