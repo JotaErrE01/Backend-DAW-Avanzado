@@ -7,8 +7,16 @@ using ProyectoDAWBackend.Data;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+var _MyCors = "MyCors";
 
 // Add services to the container.
+builder.Services.AddCors(options => {
+  options.AddPolicy(_MyCors, builder => {
+    builder.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+  });
+} );
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -45,6 +53,8 @@ if (app.Environment.IsDevelopment()) {
   app.UseSwaggerUI();
 }
 
+app.UseCors(_MyCors);
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
@@ -52,5 +62,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// app.UseCors();
 
 app.Run();
