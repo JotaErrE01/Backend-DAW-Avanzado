@@ -46,13 +46,13 @@ namespace ProyectoDAWBackend.Controllers {
       if (_context.Productos == null) {
         return NotFound();
       }
-
+    
       var producto = await _context.Productos.Where(p => p.Tipo.Nombre.Equals(tipo)).Include( p => p.Tipo).ToListAsync();
-
+      // var producto = await _context.Productos.Where(p => p.Tipo.Nombre.Equals(tipo));
       if (producto == null) {
         return NotFound();
       }
-
+    
       return producto;
     }
 
